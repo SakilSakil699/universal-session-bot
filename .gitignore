@@ -5,42 +5,28 @@
 #  GitHub  : https://github.com/SakilSakil699
 # ═══════════════════════════════════════════════════════════
 
-
-# ─────────────────────────────────────────────────────────
-#  🔐 SECRETS (NEVER commit — highest priority)
-# ─────────────────────────────────────────────────────────
+# ── 🔐 SECRETS ──
 .env
 .env.*
 !.env.example
-
-# Telegram sessions (plaintext)
 *.session
 *.session-journal
 *.session.backup
-
-# Auth keys / sensitive output
 auth_key.txt
 auth_keys/
 *.auth
-
-# Encryption keys
 *.key
 encryption.key
 
-
-# ─────────────────────────────────────────────────────────
-#  🐍 Python
-# ─────────────────────────────────────────────────────────
+# ── 🐍 Python ──
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
+*.egg-info/
 .eggs/
 lib/
 lib64/
@@ -48,47 +34,18 @@ parts/
 sdist/
 var/
 wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# Virtual environments
+# ── Virtual Environments ──
 venv/
 env/
 ENV/
 .venv/
 .conda/
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Unit test / coverage
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-
-
-# ─────────────────────────────────────────────────────────
-#  📦 Vendors (cloned via scripts/setup_vendors.sh)
-# ─────────────────────────────────────────────────────────
+# ── 📦 Vendors (cloned via setup script) ──
 vendors/tgconvert/*
 vendors/AndroidTelePorter/*
 vendors/tdata_reader/*
-
-# Keep placeholders (so folders exist in repo)
 !vendors/tgconvert/.gitkeep
 !vendors/AndroidTelePorter/.gitkeep
 !vendors/tdata_reader/.gitkeep
@@ -96,30 +53,27 @@ vendors/tdata_reader/*
 !vendors/README.md
 !vendors/.gitkeep
 
-
-# ─────────────────────────────────────────────────────────
-#  🗄️  Runtime Data (do not commit)
-# ─────────────────────────────────────────────────────────
+# ── 🗄️ Runtime Data ──
 data/
 !data/.gitkeep
+!data/README.md
+!data/*/.gitkeep
 
-data/sessions/
-data/tdata/
-data/tgnet/
+data/sessions/*
+data/tdata/*
+data/tgnet/*
 data/*.db
 data/*.sqlite
 data/*.sqlite3
 
-# Logs
+# ── 📋 Logs ──
 logs/
 !logs/.gitkeep
+!logs/README.md
 *.log
 *.log.*
 
-
-# ─────────────────────────────────────────────────────────
-#  🌐 Node.js (for GramJS worker)
-# ─────────────────────────────────────────────────────────
+# ── 🌐 Node.js ──
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -127,14 +81,9 @@ yarn-error.log*
 package-lock.json
 yarn.lock
 .pnpm-debug.log*
-
-# Keep GramJS package.json
 !engines/gramjs_package.json
 
-
-# ─────────────────────────────────────────────────────────
-#  💻 IDE / Editor
-# ─────────────────────────────────────────────────────────
+# ── 💻 IDE ──
 .vscode/
 !.vscode/settings.json.example
 .idea/
@@ -145,10 +94,7 @@ yarn.lock
 .pydevproject
 .settings/
 
-
-# ─────────────────────────────────────────────────────────
-#  🖥️  OS-specific
-# ─────────────────────────────────────────────────────────
+# ── 🖥️ OS ──
 .DS_Store
 .DS_Store?
 ._*
@@ -158,28 +104,17 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-
-# ─────────────────────────────────────────────────────────
-#  🐳 Docker
-# ─────────────────────────────────────────────────────────
-.dockerignore.local
+# ── 🐳 Docker ──
 docker-compose.override.yml
 
-
-# ─────────────────────────────────────────────────────────
-#  ☁️  Deployment / CI
-# ─────────────────────────────────────────────────────────
+# ── ☁️ Deploy ──
 *.pem
 *.crt
 *.cer
 deploy/
 deployment/
-.github/workflows/*.local.yml
 
-
-# ─────────────────────────────────────────────────────────
-#  🧪 Test artifacts
-# ─────────────────────────────────────────────────────────
+# ── 🧪 Test ──
 .pytest_cache/
 .hypothesis/
 *.cover
@@ -187,30 +122,18 @@ deployment/
 coverage.xml
 .tox/
 
-
-# ─────────────────────────────────────────────────────────
-#  📊 Database dumps
-# ─────────────────────────────────────────────────────────
+# ── 📊 DB dumps ──
 *.sql
 *.dump
 *.bak
 pgdata/
 
-
-# ─────────────────────────────────────────────────────────
-#  🔧 Misc
-# ─────────────────────────────────────────────────────────
+# ── 🔧 Misc ──
 *.tmp
 *.temp
-*.bak
 *.old
 *.orig
 *.rej
 tmp/
 temp/
 .cache/
-
-
-# ═══════════════════════════════════════════════════════════
-#  Made with ❤️  by Sakil (@YO_UR_OFFICIAL_CRUSH)
-# ═══════════════════════════════════════════════════════════

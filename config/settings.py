@@ -1,10 +1,15 @@
 """
+Universal Session Bot
+Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+GitHub  : https://github.com/SakilSakil699
+
 Advanced configuration loader with validation.
 Loads from environment variables with type safety.
 """
 import os
 from pathlib import Path
-from typing import Optional, List
+from typing import List
 from dotenv import load_dotenv
 
 # Load .env from project root
@@ -43,7 +48,7 @@ class Settings:
     RATE_LIMIT_PER_MINUTE: int = int(os.getenv("RATE_LIMIT_PER_MINUTE", "5"))
     MAX_SESSIONS_PER_USER: int = int(os.getenv("MAX_SESSIONS_PER_USER", "10"))
     
-    # ── Features ─────────────────────────────────
+    # ── Feature Flags ────────────────────────────
     ENABLE_FEROGRAM: bool = os.getenv("ENABLE_FEROGRAM", "false").lower() == "true"
     ENABLE_GRAMJS: bool = os.getenv("ENABLE_GRAMJS", "false").lower() == "true"
     ENABLE_TDATA: bool = os.getenv("ENABLE_TDATA", "false").lower() == "true"
@@ -80,7 +85,7 @@ class Settings:
                 "❌ Config validation failed:\n  • " + "\n  • ".join(errors)
             )
         
-        # Create directories
+        # Create runtime directories
         for d in [cls.LOGS_DIR, cls.SESSIONS_DIR, cls.TDATA_DIR, cls.TGNET_DIR]:
             d.mkdir(parents=True, exist_ok=True)
     
@@ -88,6 +93,11 @@ class Settings:
     def is_admin(cls, user_id: int) -> bool:
         """Check if user is admin or owner."""
         return user_id == cls.OWNER_ID or user_id in cls.ADMIN_IDS
+    
+    @classmethod
+    def is_owner(cls, user_id: int) -> bool:
+        """Check if user is owner."""
+        return user_id == cls.OWNER_ID
 
 
 settings = Settings()

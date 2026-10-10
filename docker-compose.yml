@@ -1,1 +1,112 @@
 
+# Universal Session Bot
+# Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+# Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+# GitHub  : https://github.com/SakilSakil699
+
+version: "3.9"
+
+services:
+  # ═══════════════════════════════════════════════
+  #  Telegram Bot
+  # ═══════════════════════════════════════════════
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: usb-bot
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - usb-net
+    command: python -m bot.main
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+
+  # ═══════════════════════════════════════════════
+  #  API Dashboard
+  # ═══════════════════════════════════════════════
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: usb-dashboard
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - usb-net
+    command: uvicorn api.dashboard:app --host 0.0.0.0 --port 8000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+
+  # ═══════════════════════════════════════════════
+  #  PostgreSQL
+  # ═══════════════════════════════════════════════
+  postgres:
+    image: postgres:16-alpine
+    container_name: usb-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-sessionbot}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - usb-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+
+  # ═══════════════════════════════════════════════
+  #  Redis (optional cache)
+  # ═══════════════════════════════════════════════
+  redis:
+    image: redis:7-alpine
+    container_name: usb-redis
+    restart: unless-stopped
+    command: redis-server --save "" --appendonly no
+    networks:
+      - usb-net
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+
+networks:
+  usb-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local

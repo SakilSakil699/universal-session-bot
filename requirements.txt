@@ -1,36 +1,89 @@
-# ═══════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════
 #  Universal Session Bot — Python Dependencies
-#  Author: Sakil (@YO_UR_OFFICIAL_CRUSH)
-# ═══════════════════════════════════════════════════════════
+#  Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+#  Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+#  GitHub  : https://github.com/SakilSakil699
+# ═══════════════════════════════════════════════════════════════════
+#
+#  Install:  pip install -r requirements.txt
+#
+#  Note: Ferogram is optional. If install fails, remove that line
+#        and set ENABLE_FEROGRAM=false in .env
+#
+# ═══════════════════════════════════════════════════════════════════
 
-# ── Telegram Bot ──
+
+# ───────────────────────────────────────────────────────────────────
+#  🤖 Telegram Bot Framework
+# ───────────────────────────────────────────────────────────────────
 aiogram==3.13.1
 
-# ── Login Engines ──
-telethon==1.36.0
-pyrogram==2.0.106
-tgcrypto==1.2.5
 
-# ── Cryptography ──
-cryptography==43.0.1
-argon2-cffi==23.1.0
+# ───────────────────────────────────────────────────────────────────
+#  ⚡ Login Engines (Multi-library MTProto)
+# ───────────────────────────────────────────────────────────────────
+telethon==1.36.0                    # Stable, recommended
+pyrogram==2.0.106                   # Fast, clean API
+tgcrypto==1.2.5                     # C-accelerated crypto for pyro/telethon
 
-# ── Database ──
-sqlalchemy==2.0.35
-asyncpg==0.29.0
-aiosqlite==0.20.0
-alembic==1.13.3
 
-# ── Cache ──
-redis==5.0.8
+# ───────────────────────────────────────────────────────────────────
+#  🦀 Ferogram (Rust core — OPTIONAL)
+#  Install only if you want ultra-fast engine.
+#  Set ENABLE_FEROGRAM=true in .env
+# ───────────────────────────────────────────────────────────────────
+ferogram>=0.1.0
 
-# ── API ──
+
+# ───────────────────────────────────────────────────────────────────
+#  🔐 Cryptography
+# ───────────────────────────────────────────────────────────────────
+cryptography==43.0.1                # AES-256-GCM primitives
+argon2-cffi==23.1.0                 # Argon2id KDF
+
+
+# ───────────────────────────────────────────────────────────────────
+#  🗄️  Database (SQLAlchemy 2.0 async)
+# ───────────────────────────────────────────────────────────────────
+sqlalchemy==2.0.35                  # ORM (async)
+asyncpg==0.29.0                     # PostgreSQL async driver
+aiosqlite==0.20.0                   # SQLite async driver (dev)
+alembic==1.13.3                     # DB migrations
+
+
+# ───────────────────────────────────────────────────────────────────
+#  💾 Cache & Queue
+# ───────────────────────────────────────────────────────────────────
+redis==5.0.8                        # Optional caching
+
+
+# ───────────────────────────────────────────────────────────────────
+#  🌐 API Dashboard (FastAPI + WebSocket)
+# ───────────────────────────────────────────────────────────────────
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
 websockets==13.1
 
-# ── Utils ──
-python-dotenv==1.0.1
+
+# ───────────────────────────────────────────────────────────────────
+#  🛠️  Utilities
+# ───────────────────────────────────────────────────────────────────
+python-dotenv==1.0.1                # .env loader
+orjson==3.10.7                      # Fast JSON (5x faster than json)
+aiofiles==24.1.0                    # Async file I/O
+
+# uvloop: Linux/Mac only (not Windows)
 uvloop==0.20.0; sys_platform != "win32"
-orjson==3.10.7
-aiofiles==24.1.0
+
+
+# ───────────────────────────────────────────────────────────────────
+#  📦 Vendors (for tdata/tgnet support)
+#  Uncomment if you want native pip installs instead of git clones
+# ───────────────────────────────────────────────────────────────────
+# opentele==1.15.0                  # tdata → telethon
+# tgcrypto==1.2.5                   # Already included above
+
+
+# ═══════════════════════════════════════════════════════════════════
+#  End of file — Made with ❤️  by Sakil (@YO_UR_OFFICIAL_CRUSH)
+# ═══════════════════════════════════════════════════════════════════

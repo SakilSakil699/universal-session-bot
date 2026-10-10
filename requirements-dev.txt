@@ -1,1 +1,5 @@
 
+# ═══════════════════════════════════════════════════════════
+#  Universal Session Bot — Dev Dependencies
+#  Author: Sakil (@YO_UR_OFFICIAL_CRUSH)
+# ═════════════════════════════════════════════════

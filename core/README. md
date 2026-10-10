@@ -1,0 +1,32 @@
+# Core Module
+
+Session conversion & parsing logic.
+
+## Components
+
+### `UniversalSession`
+Common denominator for all formats. All converters use this.
+
+### `SessionConverter`
+Converts UniversalSession → any format & back.
+- `to_pyrogram()` / `from_pyrogram()`
+- `to_telethon()` / `from_telethon()`
+- `to_gramjs()` / `from_gramjs()`
+- `to_mtcute()`
+- `to_json()` / `from_dict()`
+- `to_auth_key_string()` / `from_auth_key_string()`
+- `convert_all()` — all formats at once
+
+### `SessionParser`
+Auto-detect any session string format.
+
+## Example
+```python
+from core import SessionConverter, SessionParser, UniversalSession
+
+# Parse any format
+session = SessionParser.parse(some_string, api_id=123, api_hash="abc")
+
+# Convert to all
+all_formats = SessionConverter.convert_all(session)
+print(all_formats["pyrogram"])

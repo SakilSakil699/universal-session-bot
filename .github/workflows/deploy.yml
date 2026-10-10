@@ -1,0 +1,62 @@
+# Universal Session Bot
+# Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+# Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+# GitHub  : https://github.com/SakilSakil699
+#
+# Deploy to production on release tag.
+# Customize based on your hosting (VPS, Railway, Fly.io, etc.)
+
+name: 🚀 Deploy
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 📣 Notify start
+        run: |
+          echo "🚀 Deploying ${{ github.ref_name }}"
+          echo "By: Sakil (@YO_UR_OFFICIAL_CRUSH)"
+
+      # ── Option A: SSH Deploy (VPS) ──
+      - name: 🔐 Setup SSH
+        if: ${{ secrets.SSH_HOST != '' }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy via SSH
+        if: ${{ secrets.SSH_HOST != '' }}
+        run: |
+          ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /opt/universal-session-bot && \
+             git pull origin main && \
+             docker-compose down && \
+             docker-compose up -d --build && \
+             docker-compose logs --tail=50 bot"
+        continue-on-error: true
+
+      # ── Option B: Railway ──
+      - name: 🚂 Deploy to Railway
+        if: ${{ secrets.RAILWAY_TOKEN != '' }}
+        run: |
+          npm i -g @railway/cli
+          railway up --service universal-session-bot
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        continue-on-error: true
+
+      - name: ✅ Done
+        run: echo "✅ Deployment workflow completed"

@@ -1,5 +1,9 @@
-
 """
+Universal Session Bot
+Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+GitHub  : https://github.com/SakilSakil699
+
 Custom exceptions for clean error handling.
 """
 

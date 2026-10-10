@@ -1,0 +1,94 @@
+# Universal Session Bot
+# Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+# Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+# GitHub  : https://github.com/SakilSakil699
+#
+# Run tests on every push & pull request.
+
+name: 🧪 Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    env:
+      API_ID: "12345"
+      API_HASH: "abcdef1234567890abcdef1234567890"
+      BOT_TOKEN: "123456:TEST-TOKEN-FOR-CI"
+      OWNER_ID: "999999"
+      ENCRYPTION_KEY: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      DATABASE_URL: "sqlite+aiosqlite:///./data/test.db"
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: 📁 Create runtime directories
+        run: mkdir -p data logs
+
+      - name: 🧪 Run tests
+        run: pytest tests/ -v --tb=short
+
+      - name: 📊 Upload coverage to Codecov
+        if: matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  lint:
+    name: 🔍 Lint & Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 📦 Install lint tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black isort
+
+      - name: 🔍 Ruff check
+        run: ruff check . --output-format=github
+        continue-on-error: true
+
+      - name: 🎨 Black check
+        run: black --check . --diff
+        continue-on-error: true
+
+      - name: 📚 Isort check
+        run: isort --check-only . --diff
+        continue-on-error: true

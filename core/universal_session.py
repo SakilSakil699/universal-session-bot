@@ -1,9 +1,13 @@
-
 """
+Universal Session Bot
+Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+GitHub  : https://github.com/SakilSakil699
+
 UniversalSession — common denominator for all session formats.
 Any format can be converted to this, and this to any format.
 """
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import Optional
 from datetime import datetime
 
@@ -12,16 +16,15 @@ from datetime import datetime
 class UniversalSession:
     """
     Universal session object.
-    
     All formats (Pyrogram, Telethon, GramJS, Mtcute, tdata, tgnet)
     can be converted to/from this object.
     """
     # ── Core auth data ──────────────────────────
-    auth_key: bytes              # 256-byte MTProto auth key
-    dc_id: int                   # 1-5
-    user_id: int                 # Telegram user ID
-    api_id: int                  # User's API ID
-    api_hash: str                # User's API hash
+    auth_key: bytes
+    dc_id: int
+    user_id: int
+    api_id: int
+    api_hash: str
     
     # ── Optional metadata ───────────────────────
     is_bot: bool = False
@@ -32,7 +35,7 @@ class UniversalSession:
     username: Optional[str] = None
     created_at: datetime = field(default_factory=datetime.utcnow)
     
-    # ── Derived / helper ────────────────────────
+    # ── Derived properties ──────────────────────
     @property
     def auth_key_hex(self) -> str:
         return self.auth_key.hex()

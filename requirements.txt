@@ -1,13 +1,36 @@
+# ═══════════════════════════════════════════════════════════
+#  Universal Session Bot — Python Dependencies
+#  Author: Sakil (@YO_UR_OFFICIAL_CRUSH)
+# ═══════════════════════════════════════════════════════════
+
+# ── Telegram Bot ──
 aiogram==3.13.1
+
+# ── Login Engines ──
 telethon==1.36.0
 pyrogram==2.0.106
 tgcrypto==1.2.5
+
+# ── Cryptography ──
 cryptography==43.0.1
 argon2-cffi==23.1.0
-python-dotenv==1.0.1
+
+# ── Database ──
 sqlalchemy==2.0.35
 asyncpg==0.29.0
+aiosqlite==0.20.0
+alembic==1.13.3
+
+# ── Cache ──
 redis==5.0.8
-uvloop==0.20.0
+
+# ── API ──
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+websockets==13.1
+
+# ── Utils ──
+python-dotenv==1.0.1
+uvloop==0.20.0; sys_platform != "win32"
 orjson==3.10.7
 aiofiles==24.1.0

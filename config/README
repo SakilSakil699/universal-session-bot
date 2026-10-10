@@ -1,1 +1,15 @@
 
+# Config Module
+
+Central configuration for Universal Session Bot.
+
+## Files
+- `settings.py` — Environment-based settings (validated at startup)
+- `constants.py` — DC IPs, format names, emojis, UI colors
+
+## Usage
+```python
+from config import settings, Emojis
+
+print(settings.API_ID)
+print(Emojis.LOCK)  # 🔐

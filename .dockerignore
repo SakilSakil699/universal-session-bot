@@ -1,1 +1,77 @@
 
+# Universal Session Bot
+# Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
+# Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
+# GitHub  : https://github.com/SakilSakil699
+
+# ── Version control ──
+.git
+.gitignore
+.gitattributes
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+.Python
+*.so
+
+# ── Virtual environments ──
+venv/
+env/
+.venv/
+ENV/
+
+# ── Secrets (NEVER in image) ──
+.env
+.env.*
+!.env.example
+*.session
+*.session-journal
+auth_key.txt
+*.key
+
+# ── Runtime data ──
+data/
+logs/
+*.log
+*.db
+*.sqlite
+
+# ── Vendors (installed at runtime) ──
+vendors/tgconvert/
+vendors/AndroidTelePorter/
+vendors/tdata_reader/
+
+# ── Tests & CI ──
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.github/
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Docs ──
+docs/
+*.md
+!README.md
+
+# ── Misc ──
+*.tmp
+*.bak
+tmp/
+temp/

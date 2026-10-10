@@ -1,13 +1,14 @@
-
 """
 Universal Session Bot
 Author  : Sakil (@YO_UR_OFFICIAL_CRUSH)
 Telegram: https://t.me/YO_UR_OFFICIAL_CRUSH
 GitHub  : https://github.com/SakilSakil699
+
+/start, /help, /about handlers with hyperlinked credit.
 """
 from aiogram import Router, F
 from aiogram.filters import Command
-from aiogram.fsm.context import FSMContext   # ← YE MISSING HAI
+from aiogram.fsm.context import FSMContext          # ← YE ZAROORI HAI
 from aiogram.types import Message, CallbackQuery
 
 from config import settings, Author, Emojis, BOT_VERSION, BOT_NAME
@@ -22,7 +23,6 @@ router = Router(name="start")
 
 @router.message(Command("start"))
 async def cmd_start(msg: Message):
-    """Welcome message with clickable author credit."""
     user = msg.from_user
     name = user.first_name or "Friend"
     
@@ -167,11 +167,13 @@ async def cb_credit(cb: CallbackQuery):
         text, reply_markup=back_to_menu_kb(), disable_web_page_preview=True
     )
     await cb.answer()
-    @router.callback_query(F.data == "cancel_action")
+
+
+@router.callback_query(F.data == "cancel_action")
 async def cb_cancel_action(cb: CallbackQuery, state: FSMContext):
     await state.clear()
     await cb.message.edit_text(
         f"❌ <b>Cancelled</b>\n\n"
-        f"Use /newsession to start again.",
+        f"Use /newsession to start again."
     )
     await cb.answer("Cancelled")

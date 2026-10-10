@@ -1,0 +1,15 @@
+{
+  "name": "universal-session-bot-gramjs",
+  "version": "1.0.0",
+  "description": "GramJS worker for Universal Session Bot",
+  "author": "Sakil <https://t.me/YO_UR_OFFICIAL_CRUSH>",
+  "license": "MIT",
+  "main": "gramjs_engine.js",
+  "dependencies": {
+    "telegram": "^2.22.2",
+    "input": "^1.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

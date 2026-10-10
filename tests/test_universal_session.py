@@ -13,7 +13,7 @@ from core import UniversalSession
 
 class TestProperties:
     def test_full_name(self, sample_session):
-        assert sample_session.full_name == "Sakil Khan"
+        assert sample_session.full_name == "Sakil Anowar"
 
     def test_full_name_fallback(self, sample_auth_key):
         s = UniversalSession(

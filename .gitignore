@@ -1,0 +1,22 @@
+# Secrets
+.env
+*.session
+*.session-journal
+auth_key.txt
+tdata/
+tgnet/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
